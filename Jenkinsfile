@@ -6,7 +6,7 @@ pipeline {
     }
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
-        APP_NAME = "comments-api-pipeline"
+        APP_NAME = "comments-api"
         RELEASE = "1.0.0"
         DOCKER_USER = "guilhermefpv"
         DOCKER_PASS = 'dockerhub'
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/guilhermefpv/.git'
+                git branch: 'main', url: 'https://github.com/guilhermefpv/comments-api.git'
             }
         }
         stage("Sonarqube Analysis") {
