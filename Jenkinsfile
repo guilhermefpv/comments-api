@@ -1,12 +1,12 @@
 pipeline {
     agent any
-    // tools {
-    //     jdk 'jdk17'
-    //     nodejs 'node16'
-    // }
+    tools {
+        jdk 'jdk17'
+        nodejs 'nodejs16'
+    }
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
-        APP_NAME = "comments-api"
+        APP_NAME = "comentarios-api"
         RELEASE = "1.0.0"
         DOCKER_USER = "guilhermefpv"
         DOCKER_PASS = 'dockerhub'
@@ -22,7 +22,7 @@ pipeline {
         }
         stage('Checkout from Git') {
             steps {
-                git branch: 'main', url: 'https://github.com/guilhermefpv/comments-api.git'
+                git branch: 'main', url: 'https://github.com/guilhermefpv/comentarios-api'
             }
         }
         stage("Sonarqube Analysis") {
@@ -86,16 +86,16 @@ pipeline {
             }
          }
      }
-     post {
-        always {
-           emailext attachLog: true,
-               subject: "'${currentBuild.result}'",
-               body: "Project: ${env.JOB_NAME}<br/>" +
-                   "Build Number: ${env.BUILD_NUMBER}<br/>" +
-                   "URL: ${env.BUILD_URL}<br/>",
-               to: 'guilhermefpv@outlook.com',                              
-               attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
-        }
-     }
+    //  post {
+    //     always {
+    //        emailext attachLog: true,
+    //            subject: "'${currentBuild.result}'",
+    //            body: "Project: ${env.JOB_NAME}<br/>" +
+    //                "Build Number: ${env.BUILD_NUMBER}<br/>" +
+    //                "URL: ${env.BUILD_URL}<br/>",
+    //            to: 'guilhermefpv@outlook.com',                              
+    //            attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
+    //     }
+    //  }
     
 }
