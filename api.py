@@ -10,6 +10,19 @@ app.debug = True
 comments = {}
 
 
+@app.route('/')
+def hello():
+	return "Working OK"
+
+@app.route("/healthcheck/")
+def healthcheck():
+    response = {
+            'status': 'SUCCESS',
+            'message': 'Working OK',
+            }
+    return jsonify(response)
+
+
 @app.route('/api/comment/new', methods=['POST'])
 def api_comment_new():
     request_data = request.get_json()
